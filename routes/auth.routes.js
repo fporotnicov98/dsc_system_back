@@ -81,6 +81,8 @@ router.post(
   ],
   async (req, res) => {
     try {
+      console.log(req.body);
+
       const errors = validationResult(req)
 
       if (!errors.isEmpty) {
@@ -90,7 +92,6 @@ router.post(
         })
       }
 
-      console.log(req.body);
 
       const { email, password } = req.body
 
