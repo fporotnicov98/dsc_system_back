@@ -3,10 +3,10 @@ const express = require('express')
 const config = require('config')
 const mongoose = require('mongoose')
 const app = express()
-const corsMiddleware = require('./middleware/cors.middleware')
+// const corsMiddleware = require('./middleware/cors.middleware')
 const PORT = process.env.PORT || config.get('port')
 
-app.use(corsMiddleware)
+// app.use(corsMiddleware)
 app.use(cors({ credentials: true, origin: true }))
 app.use(express.json({ extended: true }))
 
