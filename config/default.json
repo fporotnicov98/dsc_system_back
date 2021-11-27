@@ -1,6 +1,5 @@
 {
   "port": 5000,
   "jwtSecret": "fpor devsecops app",
-  "mongoUri": "mongodb+srv://fedor:1234@cluster0.llqga.mongodb.net/index?retryWrites=true&w=majority",
-  "baseUrl": "http://localhost:5000"
+  "mongoUri": "mongodb+srv://fedor:1234@cluster0.llqga.mongodb.net/index?retryWrites=true&w=majority"
 }
