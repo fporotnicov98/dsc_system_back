@@ -8,69 +8,69 @@ const User = require('../models/User')
 const authMiddleware = require('../middleware/auth.middleware')
 const router = Router()
 
-// //api/auth/registerMember
+//api/auth/registerMember
 
-// router.post(
-//   '/memberRegister',
-//   [
-//     check('firstName', 'Длина поля не меньше 3 символов').isLength({ min: 3 }),
-//     check('lastName', 'Длина поля не меньше 3 символов').isLength({ min: 3 }),
-//     check('email', 'Некорректный email').isEmail(),
-//     check('password', 'Минимальная длина пароля 6 символов')
-//       .isLength({ min: 6 }),
-//     check('phone', 'Некорректный телефон').isLength({ max: 11 })
-//   ],
-//   async (req, res) => {
-//     try {
-//       const errors = validationResult(req)
+router.post(
+  '/memberRegister',
+  [
+    check('firstName', 'Длина поля не меньше 3 символов').isLength({ min: 3 }),
+    check('lastName', 'Длина поля не меньше 3 символов').isLength({ min: 3 }),
+    check('email', 'Некорректный email').isEmail(),
+    check('password', 'Минимальная длина пароля 6 символов')
+      .isLength({ min: 6 }),
+    check('phone', 'Некорректный телефон').isLength({ max: 11 })
+  ],
+  async (req, res) => {
+    try {
+      const errors = validationResult(req)
 
-//       if (!errors.isEmpty()) {
-//         return res.status(400).json({
-//           errors: errors.array(),
-//           message: 'Некорректные данные при регистрации'
-//         })
-//       }
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+          message: 'Некорректные данные при регистрации'
+        })
+      }
 
-//       const {
-//         firstName,
-//         lastName,
-//         email,
-//         phone,
-//         role,
-//         projectId,
-//         password
-//       } = req.body
+      const {
+        firstName,
+        lastName,
+        email,
+        phone,
+        role,
+        projectId,
+        password
+      } = req.body
 
-//       const candidateEmail = await SA.findOne({ email }) || await User.findOne({ email })
-//       const candidatePhone = await SA.findOne({ phone }) || await User.findOne({ phone })
+      const candidateEmail = await SA.findOne({ email }) || await User.findOne({ email })
+      const candidatePhone = await SA.findOne({ phone }) || await User.findOne({ phone })
 
-//       if (candidatePhone) {
-//         return res.status(400).json({ message: 'Пользователь с таким номером уже существует', resultCode: 1 })
-//       }
+      if (candidatePhone) {
+        return res.status(400).json({ message: 'Пользователь с таким номером уже существует', resultCode: 1 })
+      }
 
-//       if (candidateEmail) {
-//         return res.status(400).json({ message: 'Пользователь с таким email уже существует', resultCode: 1 })
-//       }
+      if (candidateEmail) {
+        return res.status(400).json({ message: 'Пользователь с таким email уже существует', resultCode: 1 })
+      }
 
-//       const hashedPassword = await bcrypt.hash(password, 12)
-//       const user = new User({
-//         firstName,
-//         lastName,
-//         email,
-//         phone,
-//         role,
-//         projectId,
-//         password: hashedPassword
-//       })
+      const hashedPassword = await bcrypt.hash(password, 12)
+      const user = new User({
+        firstName,
+        lastName,
+        email,
+        phone,
+        role,
+        projectId,
+        password: hashedPassword
+      })
 
-//       await user.save()
+      await user.save()
 
-//       res.status(201).json({ message: "Участник проекта создан", resultCode: 0 })
-//     } catch (e) {
-//       res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
-//     }
-//   }
-// )
+      res.status(201).json({ message: "Участник проекта создан", resultCode: 0 })
+    } catch (e) {
+      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    }
+  }
+)
 
 //api/auth/register
 router.post(
