@@ -39,7 +39,6 @@ router.post(
         login,
         phone,
         role,
-        // projectId,
         password
       } = req.body
 
@@ -63,7 +62,6 @@ router.post(
         phone,
         login,
         role,
-        // projectId,
         password: hashedPassword
       })
 
