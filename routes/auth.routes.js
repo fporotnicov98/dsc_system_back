@@ -22,6 +22,7 @@ router.post(
   ],
   async (req, res) => {
     try {
+      console.log(111111);
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
