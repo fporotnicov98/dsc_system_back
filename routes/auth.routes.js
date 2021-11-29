@@ -67,9 +67,11 @@ router.post(
         password: hashedPassword
       })
 
-      console.log(33333);
+      console.log(user);
 
       await user.save()
+
+      console.log('what');
 
       res.status(201).json({ user, message: "Пользователь создан", resultCode: 0 })
     } catch (e) {
