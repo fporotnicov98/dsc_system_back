@@ -65,7 +65,7 @@ router.post(
 
       await user.save()
 
-      res.status(201).json({ message: "Участник проекта создан", resultCode: 0 })
+      res.status(201).json({ user, message: "Пользователь создан", resultCode: 0 })
     } catch (e) {
       res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
     }
