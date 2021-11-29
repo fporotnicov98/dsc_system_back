@@ -38,6 +38,7 @@ router.post(
         firstName,
         lastName,
         email,
+        login,
         phone,
         role,
         projectId,
@@ -61,6 +62,7 @@ router.post(
         lastName,
         email,
         phone,
+        login,
         role,
         projectId,
         password: hashedPassword
