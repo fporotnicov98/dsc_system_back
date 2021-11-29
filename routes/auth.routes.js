@@ -34,8 +34,11 @@ router.post(
       }
 
       const {
+        firstName,
+        lastName,
         email,
         phone,
+        role,
         password
       } = req.body
 
@@ -53,7 +56,11 @@ router.post(
       console.log(22222);
       const hashedPassword = await bcrypt.hash(password, 12)
       const user = new User({
-        ...req.body,
+        firstName,
+        lastName,
+        email,
+        phone,
+        role,
         password: hashedPassword,
         owner: req.user.userId
       })
