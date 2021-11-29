@@ -31,6 +31,8 @@ router.post(
         })
       }
 
+      console.log(req.body);
+
       const {
         firstName,
         lastName,
@@ -153,8 +155,6 @@ router.post(
           message: 'Некорректные данные при входе в систему'
         })
       }
-
-      console.log(req.body);
 
       const { email, password } = req.body
 
