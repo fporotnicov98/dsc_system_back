@@ -20,6 +20,7 @@ router.post(
       .isLength({ min: 6 }),
     check('phone', 'Некорректный телефон').isLength({ max: 11 })
   ],
+  authMiddleware,
   async (req, res) => {
     try {
       console.log(111111);
@@ -33,12 +34,8 @@ router.post(
       }
 
       const {
-        firstName,
-        lastName,
         email,
-        login,
         phone,
-        role,
         password
       } = req.body
 
@@ -56,13 +53,9 @@ router.post(
       console.log(22222);
       const hashedPassword = await bcrypt.hash(password, 12)
       const user = new User({
-        firstName,
-        lastName,
-        email,
-        phone,
-        login,
-        role,
-        password: hashedPassword
+        ...req.body,
+        password: hashedPassword,
+        owner: req.user.userId
       })
 
       console.log(user);
