@@ -32,8 +32,6 @@ router.post(
         })
       }
 
-      console.log(req.body);
-
       const {
         firstName,
         lastName,
@@ -56,6 +54,7 @@ router.post(
         return res.status(400).json({ message: 'Пользователь с таким email уже существует', resultCode: 1 })
       }
 
+      console.log(22222);
       const hashedPassword = await bcrypt.hash(password, 12)
       const user = new User({
         firstName,
@@ -67,6 +66,8 @@ router.post(
         // projectId,
         password: hashedPassword
       })
+
+      console.log(33333);
 
       await user.save()
 
