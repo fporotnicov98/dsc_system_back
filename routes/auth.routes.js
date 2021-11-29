@@ -23,7 +23,6 @@ router.post(
   authMiddleware,
   async (req, res) => {
     try {
-      console.log(111111);
       const errors = validationResult(req)
 
       if (!errors.isEmpty()) {
@@ -53,7 +52,6 @@ router.post(
         return res.status(400).json({ message: 'Пользователь с таким email уже существует', resultCode: 1 })
       }
 
-      console.log(22222);
       const hashedPassword = await bcrypt.hash(password, 12)
       const user = new User({
         firstName,
@@ -65,15 +63,10 @@ router.post(
         owner: req.user.userId
       })
 
-      console.log(user);
-
       await user.save()
-
-      console.log('what');
 
       res.status(201).json({ user, message: "Пользователь создан", resultCode: 0 })
     } catch (e) {
-      console.log(e);
       res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова', e })
     }
   }
