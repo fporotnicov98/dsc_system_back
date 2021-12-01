@@ -38,5 +38,26 @@ router.post('/addProject', authMiddleware, async (req, res) => {
   }
 })
 
+// Обновление проекта
+
+router.put("/updateProject/:id", async (req, res) => {
+  try {
+
+      const project = await Project.findById({ _id: req.params.id });
+
+      task.taskTitle = req.body.taskTitle,
+      task.taskText = req.body.taskText,
+      task.edited = "1",
+      task.editedDate = req.body.editedDate
+
+      await project.save()
+
+      res.status(200).json({ message: "Задание обновлено!", resultCode: 0 })
+  } catch (e) {
+      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+
+})
+
 module.exports = router
 
