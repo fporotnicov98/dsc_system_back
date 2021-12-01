@@ -15,6 +15,15 @@ router.get('/', authMiddleware, async (req, res) => {
   }
 })
 
+router.get('/:id', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id).select('-__v')
+    res.json(user)
+  } catch (e) {
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+})
+
 // Удаление пользователя
 router.delete('/deleteUser/:id', async (req, res) => {
   try {
