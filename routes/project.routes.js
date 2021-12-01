@@ -42,7 +42,6 @@ router.post('/addProject', authMiddleware, async (req, res) => {
 
 router.put("/updateProject/:id", async (req, res) => {
   try {
-
       const project = await Project.findById({ _id: req.params.id });
 
       project.projectName = req.body.projectName,
@@ -57,8 +56,19 @@ router.put("/updateProject/:id", async (req, res) => {
   } catch (e) {
       res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
-
 })
+
+// Удаление проекта
+
+router.delete("/deleteProject/:id", async (req, res) => {
+  try {
+      await Project.findByIdAndRemove({ _id: req.params.id })
+      res.status(200).json({ message: "Проект удален!" })
+  } catch (e) {
+      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+  }
+
+});
 
 module.exports = router
 
