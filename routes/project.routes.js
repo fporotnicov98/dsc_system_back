@@ -42,19 +42,19 @@ router.post('/addProject', authMiddleware, async (req, res) => {
 
 router.put("/updateProject/:id", async (req, res) => {
   try {
-      const project = await Project.findById({ _id: req.params.id });
+    const project = await Project.findById({ _id: req.params.id });
 
-      project.projectName = req.body.projectName,
+    project.projectName = req.body.projectName,
       project.repository = req.body.repository,
       project.description = req.body.description,
       project.editedDate = Date.now()
-      project.edited = "1"
+    project.edited = "1"
 
-      await project.save()
+    await project.save()
 
-      res.status(200).json({ message: "Проект обновлен!", resultCode: 0 })
+    res.status(200).json({ message: "Проект обновлен!", resultCode: 0 })
   } catch (e) {
-      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
 })
 
@@ -62,10 +62,11 @@ router.put("/updateProject/:id", async (req, res) => {
 
 router.delete("/deleteProject/:id", async (req, res) => {
   try {
-      await Project.findByIdAndRemove({ _id: req.params.id })
-      res.status(200).json({ message: "Проект удален!" })
+    console.log(req.params.id);
+    await Project.findByIdAndRemove({ _id: req.params.id })
+    res.status(200).json({ message: "Проект удален!" })
   } catch (e) {
-      res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
+    res.status(500).json({ message: 'Что-то пошло не так, попробуйте снова' })
   }
 
 });
