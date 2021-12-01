@@ -7,8 +7,6 @@ const schema = new Schema({
   phone: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   role: { type: String, default: 'SA' },
-  isActivated: { type: Boolean, default: false },
-  activationLink: { type: String },
   projected: [{ type: Types.ObjectId, ref: 'Project' }]
 })
 
